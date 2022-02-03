@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Password strength</title>
+    <meta charset="utf-8"/>
+    <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+<div class="content">
+    <label for="login">Login:</label>
+    <input type="text" id="login" required/>
+    <label for="email">Email:</label>
+    <input type="text" id="email" required/>
+    <label for="passwordField">Password:</label>
+    <input id='passwordField' type="password"required/>
+    <label for="passwordRepeat">Repeat password:</label>
+    <input id='passwordRepeat' type="password"required/>
+    <label for="phoneNum">Phone number:</label>
+    <input type="text" id="phoneNum"required/>
+    <label for="zipcode">ZIP code:</label>
+    <input type="text" id="zipcode"required/>
+    <div id="strengthBar"></div>
+</div>
+<script type="text/javascript">
+    document.getElementById("passwordField").addEventListener("input",visualizePasswordStrength)
+    function visualizePasswordStrength(){
+        let passwordField=document.getElementById("passwordField");
+        let mailOK=false,passOK = false, phoneOK = false, postalOK = false;
+        if((/?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/.test(document.getElementById('email').value))){
+            mailOK=true;
+        }
+        if(passwordField.value.length<8){
+            if(passwordField.value.match(/[0-9]+/)){
+                if(passwordField.value.match(/[a-z]+/)){
+                    if(passwordField.value.match(/[A-Z]+/)){
+                        if(passwordField.value.match(/[^0-9a-zA-Z]+/)){
+                            passOK=true;
+                        }
+                    }
+                }
+            }
+        }
+        if(/^\+48[0-9]{9}/.test(document.getElementById('phoneNum').value)){
+
+        }
+            
+    }
+</script>
+</body>
+</html>
