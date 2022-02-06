@@ -7,30 +7,44 @@
 </head>
 <body>
 <div class="content">
-    <form>
+    <form id="registerForm">
         <label for="login">Login:</label>
-        <input type="text" id="login" required/>
+        <input type="text" id="login" placeholder="jdoe" required/>
         <label for="email">Email:</label>
-        <input type="text" id="email" required/>
+        <input type="text" id="email" placeholder="jdoe@example.xyz" required/>
         <label for="passwordField">Password:</label>
-        <input id='passwordField' type="password"required/>
+        <input id='passwordField' placeholder="type password here" type="password"required/>
         <label for="passwordRepeat">Repeat password:</label>
-        <input id='passwordRepeat' type="password"required/>
+        <input id='passwordRepeat' placeholder="repeat password" type="password"required/>
         <label for="phoneNum">Phone number:</label>
-        <input type="text" id="phoneNum"required/>
+        <input type="text" id="phoneNum" placeholder="+48123456789" required/>
         <label for="zipcode">ZIP code:</label>
         <input type="text" id="zipcode" placeholder="12-345" required/>
-        <button type="submit" onsubmit="validateFormInputs();return false">Zarejestruj</button>
+        <button id="submitButton" type="submit">Zarejestruj</button>
     </form>
 </div>
 <script type="text/javascript">
+    const elems=document.querySelectorAll("input");
+    for(elem of elems){
+        elem.addEventListener("keyup",()=>{
+            validateFormInputs();
+        });
+    }
     function validateFormInputs(){
+        const login = document.getElementById("login");
         const passwordField=document.getElementById("passwordField");
         const repeatPassword = document.getElementById("passwordRepeat");
         const phoneNum = document.getElementById("phoneNum");
         const email = document.getElementById("email");
         const zipcode = document.getElementById("zipcode");
+        const submitButton = document.getElementById("submitButton");
         const mailRegex = /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/g;
+        if(login.value.length<=3){
+            login.className="dataError";
+        }
+        else{
+            login.className="";
+        }
         if((mailRegex.test(email.value))){
             email.className="";
         }
@@ -47,7 +61,6 @@
             passwordField.className = "dataError";
             repeatPassword.className = "dataError";
         }
-        if(passOK)
         if(!/^\+48[0-9]{9}/.test(phoneNum.value) || phoneNum.value.length != 12){
             phoneNum.className="dataError";
         }
@@ -60,7 +73,14 @@
         else{
             zipcode.className = "dataError";
         }
-            
+        if(document.getElementsByClassName("dataError").length === 0)
+        {
+            submitButton.className="";
+            submitButton.setAttribute("onsubmit","");
+        }
+        else{
+            submitButton.className="inactive";
+        }
     }
 </script>
 </body>
