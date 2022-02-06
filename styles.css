@@ -4,17 +4,21 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: center;
+  align-content: center;
+}
+.content {
+  height: 90vh;
 }
 .content,
 #registerForm {
   width: 50vw;
-  height: 80vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
 #registerForm {
+  height: 80vh;
   border: 1px dashed #fff;
   background-color: #666;
   border-radius: 20px;
