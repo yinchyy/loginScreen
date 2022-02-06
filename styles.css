@@ -1,12 +1,37 @@
+body {
+  background-color: #555;
+  color: white;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
 .content,
-.content > form {
+#registerForm {
   width: 50vw;
-  height: 50vh;
+  height: 80vh;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-start;
+  align-items: center;
+  justify-content: center;
+}
+#registerForm {
+  border: 1px dashed #fff;
+  background-color: #666;
+  border-radius: 20px;
 }
 .dataError {
   background-color: red;
+}
+.inactive {
+  background-color: #888;
+}
+input,
+button {
+  border-radius: 10px;
+  margin-top: 10px;
+}
+#submitButton {
+  width: 180px;
+  height: 60px;
+  margin-top: 20px;
 }
