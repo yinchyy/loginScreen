@@ -44,16 +44,6 @@ class validation{
         else {
             repeatPassword.className = "dataError";
         }
-        /*if(passwordField.value.length>=8 && passwordField.value.match(/[0-9]+/) && passwordField.value.match(/[a-z]+/) && passwordField.value.match(/[A-Z]+/) && passwordField.value.match(/[^0-9a-zA-Z]+/)){
-            passwordField.className = "";
-            if(repeatPassword.value === passwordField.value){
-                repeatPassword.className = "";
-            }
-        }
-        else{
-            passwordField.className = "dataError";
-            repeatPassword.className = "dataError";
-        }*/
         if(!/^\+48[0-9]{9}/.test(phoneNum.value) || phoneNum.value.length != 12){
             phoneNum.className="dataError";
         }
@@ -66,22 +56,31 @@ class validation{
         else{
             zipcode.className = "dataError";
         }
+        validation.isSubmitAllowed();
+    }
+    static isSubmitAllowed() {
         if(document.getElementsByClassName("dataError").length === 0)
         {
             submitButton.className="";
-            submitButton.setAttribute("onsubmit","");
+            submitButton.setAttribute("onsubmit", "");
+            return true;
         }
         else{
-            submitButton.className="inactive";
-        }
+            submitButton.className = "inactive";
+            return false;
+        }   
+    }
+    static validateLoginPage() {
+        validation.validateLogin();
+        validation.validatePasswordOnly();
+        validation.isSubmitAllowed();
     }
     static listenForChangesInInputs(target) {
         const elems = document.querySelectorAll("input");
         if (target.toLowerCase() === "login") {
             for(let elem of elems){
                 elem.addEventListener("keyup",()=>{
-                    validation.validateLogin();
-                    validation.validatePasswordOnly();
+                    validation.validateLoginPage();
                 });
             }
         }
