@@ -1,1 +1,1 @@
-validation.listenForChangesInInputs();
+pageGeneration.generatePage("login");
