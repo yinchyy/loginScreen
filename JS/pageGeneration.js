@@ -25,7 +25,7 @@ class pageGeneration{
             <input type="text" id="login" placeholder="jdoe" required/>
             <label for="passwordField">Password:</label>
             <input id='passwordField' placeholder="type password here" type="password"required/>
-            <button id="submitButton" type="submit">Zarejestruj</button>
+            <button id="submitButton" type="submit">Zaloguj</button>
             <a onclick="pageGeneration.generatePage('register')">No account yet? Click here to register</a>
         </form>`;
         }
