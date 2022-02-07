@@ -12,9 +12,11 @@ class validation{
         const passwordField=document.getElementById("passwordField");
         if(passwordField.value.length>=8 && passwordField.value.match(/[0-9]+/) && passwordField.value.match(/[a-z]+/) && passwordField.value.match(/[A-Z]+/) && passwordField.value.match(/[^0-9a-zA-Z]+/)){
             passwordField.className = "";
+            return true;
         }
         else{
             passwordField.className = "dataError";
+            return false;
         }
        
     }
@@ -34,7 +36,15 @@ class validation{
         else{
             email.className = "dataError";
         }
-        if(passwordField.value.length>=8 && passwordField.value.match(/[0-9]+/) && passwordField.value.match(/[a-z]+/) && passwordField.value.match(/[A-Z]+/) && passwordField.value.match(/[^0-9a-zA-Z]+/)){
+        if (validation.validatePasswordOnly()) {
+            if (repeatPassword.value === passwordField.value) {
+                repeatPassword.className = "";
+            }
+        }
+        else {
+            repeatPassword.className = "dataError";
+        }
+        /*if(passwordField.value.length>=8 && passwordField.value.match(/[0-9]+/) && passwordField.value.match(/[a-z]+/) && passwordField.value.match(/[A-Z]+/) && passwordField.value.match(/[^0-9a-zA-Z]+/)){
             passwordField.className = "";
             if(repeatPassword.value === passwordField.value){
                 repeatPassword.className = "";
@@ -43,7 +53,7 @@ class validation{
         else{
             passwordField.className = "dataError";
             repeatPassword.className = "dataError";
-        }
+        }*/
         if(!/^\+48[0-9]{9}/.test(phoneNum.value) || phoneNum.value.length != 12){
             phoneNum.className="dataError";
         }
@@ -65,12 +75,22 @@ class validation{
             submitButton.className="inactive";
         }
     }
-    static listenForChangesInInputs() {
-        const elems=document.querySelectorAll("input");
-        for(let elem of elems){
-            elem.addEventListener("keyup",()=>{
-              validation.validateFormInputs();
-            });
+    static listenForChangesInInputs(target) {
+        const elems = document.querySelectorAll("input");
+        if (target.toLowerCase() === "login") {
+            for(let elem of elems){
+                elem.addEventListener("keyup",()=>{
+                    validation.validateLogin();
+                    validation.validatePasswordOnly();
+                });
+            }
+        }
+        else if (target.toLowerCase() === "register") {
+            for(let elem of elems){
+                elem.addEventListener("keyup",()=>{
+                  validation.validateFormInputs();
+                });
+            }    
         }
     }
 };
