@@ -56,23 +56,33 @@ class validation{
         else{
             zipcode.className = "dataError";
         }
-        validation.isSubmitAllowed();
+        if (validation.isSubmitAllowed())
+        {
+            submitButton.className="";
+        }
+        else{
+            submitButton.className = "inactive";
+        }
     }
     static isSubmitAllowed() {
         if(document.getElementsByClassName("dataError").length === 0)
         {
-            submitButton.className="";
             return true;
         }
         else{
-            submitButton.className = "inactive";
             return false;
         }   
     }
     static validateLoginPage() {
         validation.validateLogin();
         validation.validatePasswordOnly();
-        validation.isSubmitAllowed();
+        if (validation.isSubmitAllowed())
+        {
+            submitButton.className="";
+        }
+        else{
+            submitButton.className = "inactive";
+        }
     }
     static listenForChangesInInputs(target) {
         const elems = document.querySelectorAll("input");
