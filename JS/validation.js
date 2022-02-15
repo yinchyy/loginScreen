@@ -62,7 +62,6 @@ class validation{
         if(document.getElementsByClassName("dataError").length === 0)
         {
             submitButton.className="";
-            submitButton.setAttribute("onsubmit", "");
             return true;
         }
         else{
