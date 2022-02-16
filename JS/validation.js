@@ -1,7 +1,7 @@
 class validation{
     static validateLogin() {
         const login = document.getElementById("login");
-        if(login.value.length<=3){
+        if(!/^\w{3,}/.test(login.value)){
             login.className="dataError";
         }
         else{
