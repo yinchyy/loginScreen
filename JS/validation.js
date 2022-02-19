@@ -1,8 +1,9 @@
 class validation{
+    static errClass = "dataError";
     static validateLogin() {
         const login = document.getElementById("login");
         if(!/^\w{4,}/.test(login.value)){
-            login.className="dataError";
+            login.className= this.errClass;
         }
         else{
             login.className="";
@@ -15,7 +16,7 @@ class validation{
             return true;
         }
         else{
-            passwordField.className = "dataError";
+            passwordField.className = this.errClass;
             return false;
         }
        
@@ -34,7 +35,7 @@ class validation{
             email.className="";
         }
         else{
-            email.className = "dataError";
+            email.className = this.errClass;
         }
         if (validation.validatePasswordOnly()) {
             if (repeatPassword.value === passwordField.value) {
@@ -42,10 +43,10 @@ class validation{
             }
         }
         else {
-            repeatPassword.className = "dataError";
+            repeatPassword.className = this.errClass;
         }
         if(!/^\+48[0-9]{9}/.test(phoneNum.value) || phoneNum.value.length != 12){
-            phoneNum.className="dataError";
+            phoneNum.className=this.errClass;
         }
         else{
             phoneNum.className="";
@@ -54,7 +55,7 @@ class validation{
             zipcode.className = "";
         }
         else{
-            zipcode.className = "dataError";
+            zipcode.className = this.errClass;
         }
         if (validation.isSubmitAllowed())
         {
@@ -65,7 +66,7 @@ class validation{
         }
     }
     static isSubmitAllowed() {
-        if(document.getElementsByClassName("dataError").length === 0)
+        if(document.getElementsByClassName(this.errClass).length === 0)
         {
             return true;
         }
